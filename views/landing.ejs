@@ -1,0 +1,93 @@
+<% include partials/header %>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet"> 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+</head>
+<style>
+    * {  
+    font-family: 'Exo', sans-serif;
+    }
+
+    .part_1 {
+        background-image: url(https://d3qvqlc701gzhm.cloudfront.net/full/4788d29806caac9229c9d10cee23b2c4a631af829729ad16dc9b6654722d912a.jpg);
+        min-height: 700px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .part_2 {
+        background-image: url(https://d3qvqlc701gzhm.cloudfront.net/full/1dd6b905b7d1be7b8375c2465e9f5249aef2d154c76b8490236cb45515a31d8b.jpg);
+        min-height: 700px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+   
+    @import url(https://fonts.googleapis.com/css?family=Raleway:600);
+    h1 {
+        color: #fff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 500%;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        padding-top: 200px;       
+    }
+
+    h2 {
+        color: #fff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 300%;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    h3 {
+        color: #fff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 200%;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        padding-top: 100px; 
+    }
+
+
+    a {
+        color: aqua;
+    }
+
+</style>
+
+<body>
+    <!-- Introduction -->
+    <div class = "part_1">
+            <h1>
+                <span class="animated bounceInDown delay-1s">Welcome to VisitNL</span> 
+            </h1>
+
+            <h2>
+                <span class="animated bounceInLeft delay-2s">Let the world know</span> 
+            </h2>
+    </div>
+
+    <div class = "part_2">
+        <br>
+        <br>
+        <h2 class = "animated zoomIn delay-3s"><a href="/register">Sign up</a> Today and share your favorite destinations</h2>
+        <br>
+        <br>
+        <h3 class = "animated zoomIn delay-4s">View <a href="/places">destinations</a> shared by our users and comment about your experience</h3>
+    </div>
+</body>
+
+<!-- <a class= ""href = "/places">View all Places</a> -->
+
+<% include partials/footer %>
+
