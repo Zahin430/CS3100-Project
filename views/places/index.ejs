@@ -1,18 +1,21 @@
 <% include ../partials/header %>
 
-<!-- <h4><%= currentUser %></h4> -->
+<style>
+#add {
+    margin-top: 10px;
+    margin-right: 1250px;
 
-<div class="container">
-    <header class="jumbotron">
-        <div class="container">
-            <h1>Places to explore</h1>
-            <p>Enjoy the culture while you are here</p>       
-            <p>
-                <a class = "btn btn-primary btn-large" href="/places/new">Add new places you have visited</a>
-            </p>
-        </div>
-    </header>
-<hr>
+}
+
+</style>
+
+<!-- <h4><%= currentUser %></h4> -->
+    <% if (currentUser && currentUser.isAdmin) { %>
+        <h1>Welcome to administrative mode, <%= currentUser.username %></h1>
+    <% } %>
+<p>
+    <a id = "add" class = "btn btn-primary btn-large" href="/places/new">Add new places you have visited</a>
+</p>
     <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
         <% places.forEach(function(places){ %>
         <div class="col-md-3 col-sm-6" style="width: 280px; height: 300px; padding: 15px;">

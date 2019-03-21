@@ -45,6 +45,7 @@ router.post("/", isLoggedIn,  upload.single('image'), function(req,res) {
         console.log(result, error);
         // add cloudinary url for the image to the place object under image property
         req.body.place.image = result.secure_url;
+        req.body.place.imageId = result.public_id;
         // add author to place
         req.body.place.author = {
             id: req.user._id,
@@ -66,8 +67,8 @@ router.get("/new", isLoggedIn, function(req,res){
 });
 
 
-// find the campground with the provided ID
-// render show template with that campground
+// find the place with the provided ID
+// render show template with that place
 router.get("/:id", function(req,res){
     Place.findById(req.params.id).populate("comments").exec(function(err, foundPlace){
         if(err) {
@@ -84,26 +85,54 @@ router.get("/:id/edit",function(req,res){
     Place.findById(req.params.id, function(err,foundPlace){
       if (err) {
           res.redirect("/places");
-      }  else{
+      }  else {
         res.render("places/edit", {place: foundPlace});
       }
     });
 });
 
 //UPDATE PLACE ROUTE
-router.put("/:id", function(req,res){
+router.put("/:id", upload.single('image'), function(req,res){
     //find and update the correct place
-    Place.findByIdAndUpdate(req.params.id,req.body.place, function(err, updatedPlace){
+    Place.findById(req.params.id, async function(err,place){
         if(err){
             res.redirect("/places");
         } else {
+            if(req.file) {
+                try {
+                await cloudinary.v2.uploader.destroy(place.imageId); 
+                var result = await cloudinary.v2.uploader.upload(req.file.path);
+                place.imageId = result.public_id;
+                place.image = result.secure_url;
+                } catch(err) {
+                    return res.redirect("/places");                    
+                }
+            }
+            place.name = req.body.name;
+            place.description = req.body.description;
+            place.save();
             res.redirect("/places/" + req.params.id);
         }
-    });
-    //redirect on the show page
-    
+    });    
 });
 
+router.delete("/:id", function(req,res){
+    Place.findById(req.params.id, async function(err, place){
+        if(err){
+            return res.redirect("/places");
+        }
+        try{
+            await cloudinary.v2.uploader.destroy(place.imageId);
+            place.remove();
+            res.redirect("/places"); 
+        } catch(err) {
+            if(err){
+               return res.redirect("/places"); 
+            }
+        }
+
+    });
+});
 //middleware to check if user is logged in
 function isLoggedIn(req,res,next) {
     if(req.isAuthenticated()){

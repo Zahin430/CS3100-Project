@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var placeSchema = new mongoose.Schema({
     name: String,
     image: String,
+    imageId: String,
     description: String,
     author: {
         id: {

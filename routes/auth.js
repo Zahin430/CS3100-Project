@@ -17,10 +17,13 @@ router.get("/register", function(req,res){
     res.render("register");
 });
 
-//handle sing up logic
+//HANDLE SIGN UP LOGIC
 router.post("/register", function(req,res){
     console.log("signing up");
    var newUser = new User({username: req.body.username});
+   if(req.body.adminCode === 'iamadmin123') {
+       newUser.isAdmin = true;
+   }
    User.register(newUser, req.body.password, function(err, user){
        if(err) {
            console.log(err);

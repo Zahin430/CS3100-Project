@@ -5,12 +5,8 @@ var express    = require("express"),
     methodOverride = require("method-override"),
     passport   = require("passport"),
     localStrategy = require("passport-local"),
-    Place      = require("./models/place"),
-    Comment = require('./models/comment'),
     User       = require("./models/user"),
-    seedDB     = require("./seeds"),
-    jsonParser = bodyParser.json();
-    require('dotenv').config();
+    seedDB     = require("./seeds");
 
 // Declaring all the routes here
 var commentRoutes = require("./routes/comments"),
